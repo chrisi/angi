@@ -20,9 +20,9 @@ angular.module('angiApp', ['ngAnimate', 'ngRoute'])
     })
     .config(function ($routeProvider) {
         $routeProvider
-            .when('/', { templateUrl: 'shop.html' })
-            .when('/about', { template: 'Über unsere Pizzeria' })
-            .otherwise({ redirectTo: '/' });
+            .when('/', {templateUrl: 'shop.html'})
+            .when('/about', {template: 'Über unsere Pizzeria'})
+            .otherwise({redirectTo: '/'});
     })
     .controller('ArticlesCtrl', function ($scope, $http, Cart) {
         $http.get('articles.json').then(function (articlesResponse) {
@@ -40,7 +40,8 @@ angular.module('angiApp', ['ngAnimate', 'ngRoute'])
                 value: '='
             },
             template: '<span ng-show="value == 0">kostenlos</span>' +
-                '<span ng-show="value > 0">{{value | currency}}</span>'
+            '<span ng-show="value > 0">{{value | currency}}</span>'
         }
     })
 ;
+
