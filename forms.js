@@ -1,4 +1,4 @@
-angular.module('forms',[])
+angular.module('forms', [])
     .directive('rebootInput', function () {
         return {
             restrict: 'E',
@@ -21,12 +21,23 @@ angular.module('forms',[])
                 optionSource: '@',
                 ngModel: '='
             },
-            controller: function($scope, $compile, $http) {
+            controller: function ($scope, $compile, $http) {
                 $http.get($scope.optionSource).then(function (articlesResponse) {
                     $scope.options = articlesResponse.data;
                 });
             },
             templateUrl: 'templ/select.html'
+        }
+    })
+    .directive('rebootDialog', function () {
+        return {
+            restrict: 'E',
+            transclude: true,
+            scope: {
+                title: '@'
+            },
+            templateUrl: 'templ/dialog.html',
+            replace: true
         }
     })
 ;
