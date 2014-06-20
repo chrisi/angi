@@ -1,0 +1,8 @@
+[
+    {"salutation": "Herr", "firstname": "Christian", "lastname": "Gebauer" },
+    {"salutation": "Frau", "firstname": "Stefanie", "lastname": "Cremer" },
+    {"salutation": "Herr", "firstname": "Burkhard", "lastname": "Gebauer" },
+    {"salutation": "Herr", "firstname": "Daniel", "lastname": "Strauch" },
+    {"salutation": "Frau", "firstname": "Pamela", "lastname": "Strauch" },
+    {"salutation": "Frau", "firstname": "Kerstin", "lastname": "Röser" }
+]

@@ -1,0 +1,80 @@
+<html>
+<head>
+    <meta charset="utf8"/>
+    <title>AngularJS Tutorial</title>
+    <link rel="stylesheet" href="http://netdna.bootstrapcdn.com/bootstrap/3.0.3/css/bootstrap.min.css">
+    <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+<script src="js-lib/angular.min.js"></script>
+<script src="js-lib/jquery-2.1.1.min.js"></script>
+<script src="forms.js"></script>
+<script src="contactApp.js"></script>
+<script>
+
+</script>
+
+<div ng-app="contactApp">
+    <div class="row" style="margin-top: 60px;">
+
+        <div class="col-md-offset-1 col-md-4">
+            <div class="panel panel-default" ng-controller="ContactListCtrl">
+                <div class="panel-heading">
+                    <span class="panel-title">List of Contacts</span>
+                    <button type="button" class="btn btn-default btn-xs pull-right" ng-click="store.loadContacts()">Load</button>
+                </div>
+                <div class="panel-body">
+                    <table class="table table-hover">
+                        <thead>
+                        <tr>
+                            <th>Salutation</th>
+                            <th>Firstname</th>
+                            <th>Lastname</th>
+                            <th>&nbsp;</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr ng-repeat="row in store.getContacts()">
+                            <td>{{row.salutation}}</td>
+                            <td>{{row.firstname}}</td>
+                            <td>{{row.lastname}}</td>
+                            <td><a href class="btn btn-primary btn-xs" ng-click="selectContact(row);">Edit</a>
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-offset-1 col-md-4">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h3 class="panel-title">Edit Contact</h3>
+                </div>
+                <div class="panel-body">
+                    <form class="form-horizontal col-md-offset-1 col-md-10" role="form" ng-controller="ContactFormCtrl">
+                        <fieldset>
+
+                            <reboot-select name="salutation" caption="Salutation" placeholder="Select salutation"
+                                           ng-model="form.salutation"
+                                           option-source="salutations.json"></reboot-select>
+                            <reboot-input name="firstname" caption="Firstname" placeholder="Enter firstname"
+                                          ng-model="form.firstname"></reboot-input>
+                            <reboot-input name="lastname" caption="Lastname" placeholder="Enter lastname"
+                                          ng-model="form.lastname"></reboot-input>
+
+                        </fieldset>
+                        <button type="button" class="btn btn-default pull-right" ng-click="submit(form)">Submit</button>
+                        <button type="button" class="btn btn-default pull-right" ng-click="reset()">Reset</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+</body>
+</html>
