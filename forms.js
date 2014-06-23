@@ -34,7 +34,9 @@ angular.module('forms', [])
             restrict: 'E',
             transclude: true,
             scope: {
-                title: '@'
+                title: '@',
+                desc: '@',
+                name: '@'
             },
             templateUrl: 'templ/dialog.html',
             replace: true

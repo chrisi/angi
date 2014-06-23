@@ -35,7 +35,7 @@ angular.module('angiApp', ['ngAnimate', 'ngRoute'])
     })
     .directive('price', function () {
         return {
-            restrict: ['E', 'C'],
+            restrict: 'EC',
             scope: {
                 value: '='
             },
