@@ -9,10 +9,16 @@
 <body>
 <script src="js-lib/angular.min.js"></script>
 <script src="js-lib/jquery-2.1.1.min.js"></script>
+<script src="js-lib/bootstrap-3.1.1.min.js"></script>
 <script src="forms.js"></script>
 <script src="contactApp.js"></script>
 <script>
-
+    $(function () {
+        $('#openModal').click(function () {
+            var mymodal = $('#myModal');
+            mymodal.modal('show');
+        });
+    });
 </script>
 
 <div ng-app="contactApp">
@@ -49,22 +55,28 @@
                 </div>
             </div>
         </div>
-
-        <div ng-controller="ContactFormCtrl">
-            <reboot-dialog title="Edit Contact">
-                <reboot-select name="salutation" caption="Salutation" placeholder="Select salutation"
-                               ng-model="form.salutation"
-                               option-source="salutations.json"></reboot-select>
-                <reboot-input name="firstname" caption="Firstname" placeholder="Enter firstname"
-                              ng-model="form.firstname"></reboot-input>
-                <reboot-input name="lastname" caption="Lastname" placeholder="Enter lastname"
-                              ng-model="form.lastname"></reboot-input>
-            </reboot-dialog>
-        </div>
-
     </div>
-</div>
 
+    <div class="row" ng-controller="ContactFormCtrl">
+        <reboot-dialog title="Edit Contact">
+            <reboot-select name="salutation" caption="Salutation" placeholder="Select salutation"
+                           ng-model="form.salutation"
+                           option-source="salutations.json"></reboot-select>
+            <reboot-input name="firstname" caption="Firstname" placeholder="Enter firstname"
+                          ng-model="form.firstname"></reboot-input>
+            <reboot-input name="lastname" caption="Lastname" placeholder="Enter lastname"
+                          ng-model="form.lastname"></reboot-input>
+        </reboot-dialog>
+
+        <!--<reboot-dialog title="Edit Adresse">-->
+            <!--<reboot-input name="firstname" caption="Firstname" placeholder="Enter firstname"-->
+                          <!--ng-model="form.firstname"></reboot-input>-->
+            <!--<reboot-input name="lastname" caption="Lastname" placeholder="Enter lastname"-->
+                          <!--ng-model="form.lastname"></reboot-input>-->
+        <!--</reboot-dialog>-->
+    </div>
+
+</div>
 
 </body>
 </html>

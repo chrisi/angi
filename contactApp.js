@@ -27,6 +27,7 @@ angular.module('contactApp', ['forms'])
         $scope.$on('contactSelected', function (event, args) {
             $scope.form = args;
             $scope.pristine = angular.copy(args);
+            $scope.showDialog = true;
         });
     })
     .controller('ContactListCtrl', function ($rootScope, $scope, $http, ContactStore) {

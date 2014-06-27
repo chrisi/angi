@@ -33,13 +33,46 @@ angular.module('forms', [])
         return {
             restrict: 'E',
             transclude: true,
-            scope: {
-                title: '@',
-                desc: '@',
-                name: '@'
-            },
+            scope: false,
+//            {
+//                title: '@',
+//                desc: '@',
+//                name: '@',
+//                modalShow: "="
+            //TODO: Trennung reinbringen, 2 Dialoge parallel sonst nicht moeglich
+//            },
             templateUrl: 'templ/dialog.html',
-            replace: true
+            link: function (scope, element, attrs) {
+                scope.title = attrs.title;
+                scope.name = attrs.title;
+            }
         }
+    }).
+    directive("modalShow", function ($parse) {
+        return {
+            restrict: "A",
+            link: function (scope, element, attrs) {
+                //Hide or show the modal
+                scope.showModal = function (visible, elem) {
+                    if (!elem)
+                        elem = element;
+
+                    if (visible)
+                        $(elem).modal("show");
+                    else
+                        $(elem).modal("hide");
+                };
+                //Watch for changes to the modal-visible attribute
+                scope.$watch(attrs.modalShow, function (newValue, oldValue) {
+                    scope.showModal(newValue, attrs.$$element);
+                });
+                //Update the visible value when the dialog is closed through UI actions (Ok, cancel, etc.)
+                $(element).bind("hide.bs.modal", function () {
+                    $parse(attrs.modalShow).assign(scope, false);
+                    if (!scope.$$phase && !scope.$root.$$phase)
+                        scope.$apply();
+                });
+            }
+        };
     })
 ;
