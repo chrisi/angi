@@ -2,14 +2,15 @@
 <head>
     <meta charset="utf8"/>
     <title>AngularJS Tutorial</title>
-    <link rel="stylesheet" href="http://netdna.bootstrapcdn.com/bootstrap/3.0.3/css/bootstrap.min.css">
-    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="css/bootstrap-3.1.1.min.css">
+    <link rel="stylesheet" href="css/styles.css">
 </head>
 
 <body>
 <script src="js-lib/angular.min.js"></script>
 <script src="js-lib/jquery-2.1.1.min.js"></script>
 <script src="js-lib/bootstrap-3.1.1.min.js"></script>
+<script src="js-lib/ui-bootstrap-custom-tpls-0.10.0.min.js"></script>
 <script src="forms.js"></script>
 <script src="contactApp.js"></script>
 <script>
@@ -21,14 +22,15 @@
     });
 </script>
 
-<div ng-app="contactApp">
+<div data-ng-app="contactApp">
     <div class="row" style="margin-top: 60px;">
 
         <div class="col-md-offset-1 col-md-4">
             <div class="panel panel-default" ng-controller="ContactListCtrl">
                 <div class="panel-heading">
                     <span class="panel-title">List of Contacts</span>
-                    <button type="button" class="btn btn-default btn-xs pull-right" ng-click="store.loadContacts()">
+                    <button type="button" class="btn btn-default btn-xs pull-right"
+                            data-ng-click="store.loadContacts()">
                         Load
                     </button>
                 </div>
@@ -39,7 +41,7 @@
                             <th>Salutation</th>
                             <th>Firstname</th>
                             <th>Lastname</th>
-                            <th>&nbsp;</th>
+                            <th>Edit</th>
                         </tr>
                         </thead>
                         <tbody>
@@ -47,7 +49,11 @@
                             <td>{{row.salutation}}</td>
                             <td>{{row.firstname}}</td>
                             <td>{{row.lastname}}</td>
-                            <td><a href class="btn btn-primary btn-xs" ng-click="selectContact(row);">Edit</a>
+                            <td>
+                                <a href class="btn btn-primary btn-xs"
+                                   data-ng-click="selectContact(row,'rb');">Classic/Live</a>
+                                <a href class="btn btn-primary btn-xs"
+                                   data-ng-click="selectContact(row,'ng');">Angular-UI</a>
                             </td>
                         </tr>
                         </tbody>
@@ -61,19 +67,33 @@
         <reboot-dialog title="Edit Contact">
             <reboot-select name="salutation" caption="Salutation" placeholder="Select salutation"
                            ng-model="form.salutation"
-                           option-source="salutations.json"></reboot-select>
+                           option-source="data/salutations.json"></reboot-select>
             <reboot-input name="firstname" caption="Firstname" placeholder="Enter firstname"
                           ng-model="form.firstname"></reboot-input>
             <reboot-input name="lastname" caption="Lastname" placeholder="Enter lastname"
                           ng-model="form.lastname"></reboot-input>
         </reboot-dialog>
+    </div>
 
-        <!--<reboot-dialog title="Edit Adresse">-->
-            <!--<reboot-input name="firstname" caption="Firstname" placeholder="Enter firstname"-->
-                          <!--ng-model="form.firstname"></reboot-input>-->
-            <!--<reboot-input name="lastname" caption="Lastname" placeholder="Enter lastname"-->
-                          <!--ng-model="form.lastname"></reboot-input>-->
-        <!--</reboot-dialog>-->
+    <div ng-controller="ModalDemoCtrl">
+        <script type="text/ng-template" id="myModalContent.html">
+            <div class="modal-header">
+                <h3 class="modal-title">Edit Contact</h3>
+            </div>
+            <div class="modal-body">
+                <reboot-select name="salutation" caption="Salutation" placeholder="Select salutation"
+                               ng-model="form.salutation"
+                               option-source="data/salutations.json"></reboot-select>
+                <reboot-input name="firstname" caption="Firstname" placeholder="Enter firstname"
+                              ng-model="form.firstname"></reboot-input>
+                <reboot-input name="lastname" caption="Lastname" placeholder="Enter lastname"
+                              ng-model="form.lastname"></reboot-input>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-default" ng-click="cancel()">Cancel</button>
+                <button class="btn btn-primary" ng-click="ok()">Ok</button>
+            </div>
+        </script>
     </div>
 
 </div>
