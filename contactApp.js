@@ -1,4 +1,4 @@
-angular.module('contactApp', ['forms', 'ui.bootstrap'])
+angular.module('contactApp', ['forms', 'compat', 'ui.bootstrap'])
     .factory('ContactStore', function ($http) {
         var contacts = [];
         return {
@@ -45,7 +45,7 @@ angular.module('contactApp', ['forms', 'ui.bootstrap'])
             ContactStore.updateContact(args);
         });
     })
-    .controller('ModalInstanceCtrl', function ($scope, $http, $modalInstance, form) {
+    .controller('ModalInstanceCtrl', function ($scope, $http, $modalInstance, plainTransformRequest, form) {
         $scope.form = form;
 
         $scope.ok = function () {
@@ -53,11 +53,15 @@ angular.module('contactApp', ['forms', 'ui.bootstrap'])
             $http({
                 url: 'http://localhost:8080/demo/service/submitContact.do',
                 method: 'POST',
+                //params: $scope.form,
+                //data: $.param($scope.form),
                 data: $scope.form,
+                //transformRequest: jQueryTransformRequest,
+                //transformRequest: plainTransformRequest,
                 headers: {
                     'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'
                 }
-            }).success(function(data){
+            }).success(function (data) {
                 alert('done');
             });
 
