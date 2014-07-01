@@ -45,10 +45,22 @@ angular.module('contactApp', ['forms', 'ui.bootstrap'])
             ContactStore.updateContact(args);
         });
     })
-    .controller('ModalInstanceCtrl', function ($scope, $modalInstance, form) {
+    .controller('ModalInstanceCtrl', function ($scope, $http, $modalInstance, form) {
         $scope.form = form;
 
         $scope.ok = function () {
+
+            $http({
+                url: 'http://localhost:8080/demo/service/submitContact.do',
+                method: 'POST',
+                data: $scope.form,
+                headers: {
+                    'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'
+                }
+            }).success(function(data){
+                alert('done');
+            });
+
             $modalInstance.close($scope.form);
         };
 

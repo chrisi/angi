@@ -41,7 +41,7 @@
                             <th>Salutation</th>
                             <th>Firstname</th>
                             <th>Lastname</th>
-                            <th>Edit</th>
+                            <th>&nbsp;</th>
                         </tr>
                         </thead>
                         <tbody>
@@ -50,10 +50,16 @@
                             <td>{{row.firstname}}</td>
                             <td>{{row.lastname}}</td>
                             <td>
-                                <a href class="btn btn-primary btn-xs"
-                                   data-ng-click="selectContact(row,'rb');">Classic/Live</a>
-                                <a href class="btn btn-primary btn-xs"
-                                   data-ng-click="selectContact(row,'ng');">Angular-UI</a>
+                                <div class="btn-group">
+                                    <button type="button" class="btn btn-default dropdown-toggle btn-xs"
+                                            data-toggle="dropdown">
+                                        <span class="glyphicon glyphicon-cog"></span> <span class="caret"></span>
+                                    </button>
+                                    <ul class="dropdown-menu" role="menu">
+                                        <li><a href="#" ng-click="selectContact(row,'rb');">Classic / Reboot</a></li>
+                                        <li><a href="#" ng-click="selectContact(row,'ng');">Angular UI</a></li>
+                                    </ul>
+                                </div>
                             </td>
                         </tr>
                         </tbody>
